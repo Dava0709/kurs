@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IronPower Store - Спортивное питание</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">💪</span>
+        <span>IronPower Store</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li>
+          <a href="cart.html" class="cart-link">
+            🛒 Корзина
+            <span class="cart-counter">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== ГЛАВНАЯ СТРАНИЦА ===== -->
+  <main>
+    <!-- HERO СЕКЦИЯ -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">IronPower Store</h1>
+        <p class="hero-subtitle">Премиальное спортивное питание для ваших результатов</p>
+        <div class="hero-buttons">
+          <a href="catalog.html" class="btn btn-primary">Посмотреть каталог</a>
+          <a href="about.html" class="btn btn-secondary">Узнать больше</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ИНФОРМАЦИОННАЯ СЕКЦИЯ -->
+    <section class="catalog-section">
+      <div class="section-header">
+        <h2 class="section-title">Добро пожаловать!</h2>
+        <p class="section-subtitle">Все товары отобраны профессионалами фитнеса</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">⚡</div>
+          <h3>Быстрая доставка</h3>
+          <p>Бесплатная доставка по Казахстану при заказе свыше 15000 ₸</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">✅</div>
+          <h3>Качество гарантировано</h3>
+          <p>Только оригинальные товары проверенных производителей</p>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon">💬</div>
+          <h3>Профессиональная консультация</h3>
+          <p>Наши специалисты помогут выбрать подходящий товар</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ПОПУЛЯРНЫЕ ТОВАРЫ -->
+    <section class="catalog-section">
+      <div class="section-header">
+        <h2 class="section-title">Популярные товары</h2>
+        <p class="section-subtitle">Топ-выбор наших клиентов</p>
+      </div>
+
+      <div class="catalog-grid" id="popularProducts">
+        <!-- Будет загружено через JavaScript -->
+      </div>
+
+      <div style="text-align: center; margin-top: 2rem;">
+        <a href="catalog.html" class="btn btn-primary">Смотреть все товары</a>
+      </div>
+    </section>
+
+    <!-- ЭКСПОРТ В XML (ДЕМОНСТРАЦИЯ VISITOR PATTERN) -->
+    <section class="catalog-section" style="background-color: var(--card-bg); padding: var(--spacing-lg); border-radius: 0.5rem; border: 1px solid var(--border-color);">
+      <div class="section-header">
+        <h2 class="section-title">Паттерн Visitor</h2>
+        <p class="section-subtitle">Экспортируйте каталог товаров в XML с помощью паттерна Visitor</p>
+      </div>
+
+      <div style="text-align: center; margin-top: var(--spacing-lg);">
+        <p style="color: var(--text-secondary); margin-bottom: var(--spacing-md); line-height: 1.8;">
+          <strong>Паттерн Visitor</strong> позволяет выполнять операции над объектами товаров без изменения их классов.<br>
+          Нажмите кнопку ниже, чтобы экспортировать все товары в XML формат.
+        </p>
+
+        <button class="btn btn-primary" onclick="exportProductsToXML()" style="padding: var(--spacing-md) var(--spacing-lg); font-size: 1.1rem;">
+          📥 Экспортировать товары в XML
+        </button>
+      </div>
+
+      <div style="margin-top: var(--spacing-lg); padding: var(--spacing-md); background-color: var(--dark-bg); border-radius: 0.25rem; border-left: 4px solid var(--primary-color);">
+        <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+          <strong style="color: var(--primary-color);">Как это работает:</strong><br>
+          1. Product (товар) имеет метод <code style="background: var(--dark-bg); color: var(--accent-color);">accept(visitor)</code><br>
+          2. Visitor (XMLExportVisitor) содержит логику экспорта<br>
+          3. При вызове <code style="background: var(--dark-bg); color: var(--accent-color);">product.accept(xmlVisitor)</code> товар передает себя visitor'у<br>
+          4. Visitor получает доступ к данным и формирует XML<br>
+          5. Логика обработки отделена от структуры данных
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2024 IronPower Store. Все права защищены. | 
+      <a href="about.html">О нас</a> | 
+      <a href="#">Контакты</a> | 
+      <a href="#">Политика конфиденциальности</a>
+    </p>
+  </footer>
+
+  <!-- СКРИПТЫ -->
+  <script src="js/products.js"></script>
+  <script src="js/visitor.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    // Загрузить популярные товары на главной странице
+    document.addEventListener('DOMContentLoaded', function() {
+      const popularProducts = document.querySelector('#popularProducts');
+      if (popularProducts) {
+        // Показать первые 6 товаров
+        allProducts.slice(0, 6).forEach(product => {
+          const card = createProductCard(product);
+          popularProducts.appendChild(card);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

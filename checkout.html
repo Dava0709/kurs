@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Оформление заказа - IronPower Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">💪</span>
+        <span>IronPower Store</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li>
+          <a href="cart.html" class="cart-link">
+            🛒 Корзина
+            <span class="cart-counter">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== ОФОРМЛЕНИЕ ЗАКАЗА ===== -->
+  <main>
+    <section class="checkout-container">
+      <h2 class="section-title" style="margin-bottom: var(--spacing-lg);">Оформление заказа</h2>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--spacing-lg);">
+        <!-- ФОРМА -->
+        <div>
+          <div class="checkout-form">
+            <h3 style="margin-bottom: var(--spacing-lg); font-size: 1.3rem;">Ваши данные</h3>
+
+            <div class="form-group">
+              <label for="firstName">Имя *</label>
+              <input type="text" id="firstName" required placeholder="Иван">
+            </div>
+
+            <div class="form-group">
+              <label for="lastName">Фамилия *</label>
+              <input type="text" id="lastName" required placeholder="Петров">
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email *</label>
+              <input type="email" id="email" required placeholder="example@mail.com">
+            </div>
+
+            <div class="form-group">
+              <label for="phone">Телефон *</label>
+              <input type="tel" id="phone" required placeholder="+7 (999) 999-99-99">
+            </div>
+
+            <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); font-size: 1.3rem;">Адрес доставки</h3>
+
+            <div class="form-group">
+              <label for="city">Город *</label>
+              <input type="text" id="city" required placeholder="Алматы">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label for="address">Адрес *</label>
+                <input type="text" id="address" required placeholder="Улица, дом">
+              </div>
+
+              <div class="form-group">
+                <label for="zip">Индекс *</label>
+                <input type="text" id="zip" required placeholder="123456">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="comment">Комментарий к заказу</label>
+              <textarea id="comment" rows="3" placeholder="Дополнительная информация..."></textarea>
+            </div>
+
+            <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); font-size: 1.3rem;">Способ доставки</h3>
+
+            <div class="form-group">
+              <input type="radio" id="delivery1" name="delivery" checked>
+              <label for="delivery1" style="display: inline; margin-left: var(--spacing-sm);">Курьер (1-2 дня) - Бесплатно</label>
+            </div>
+
+            <div class="form-group">
+              <input type="radio" id="delivery2" name="delivery">
+              <label for="delivery2" style="display: inline; margin-left: var(--spacing-sm);">EMS по Казахстану (3-5 дней) - 1200 ₸</label>
+            </div>
+
+            <div class="form-group">
+              <input type="radio" id="delivery3" name="delivery">
+              <label for="delivery3" style="display: inline; margin-left: var(--spacing-sm);">Самовывоз (Алматы) - Бесплатно</label>
+            </div>
+
+            <h3 style="margin-top: var(--spacing-lg); margin-bottom: var(--spacing-lg); font-size: 1.3rem;">Способ оплаты</h3>
+
+            <div class="form-group">
+              <input type="radio" id="payment1" name="payment" checked>
+              <label for="payment1" style="display: inline; margin-left: var(--spacing-sm);">Карта (Visa, MasterCard)</label>
+            </div>
+
+            <div class="form-group">
+              <input type="radio" id="payment2" name="payment">
+              <label for="payment2" style="display: inline; margin-left: var(--spacing-sm);">PayPal</label>
+            </div>
+
+            <div class="form-group">
+              <input type="radio" id="payment3" name="payment">
+              <label for="payment3" style="display: inline; margin-left: var(--spacing-sm);">Наложенный платеж</label>
+            </div>
+
+            <button class="btn btn-primary" onclick="completeOrder()" style="width: 100%; margin-top: var(--spacing-lg); padding: var(--spacing-md); font-size: 1rem;">
+              ✓ Подтвердить заказ
+            </button>
+          </div>
+        </div>
+
+        <!-- ИТОГИ -->
+        <div>
+          <div class="checkout-form">
+            <h3 style="margin-bottom: var(--spacing-lg); font-size: 1.3rem;">Итоги заказа</h3>
+
+            <div id="checkoutItems">
+              <!-- Будет загружено через JavaScript -->
+            </div>
+
+            <div style="margin-top: var(--spacing-lg); padding-top: var(--spacing-lg); border-top: 1px solid var(--border-color);">
+              <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md);">
+                <span>Стоимость товаров:</span>
+                <strong id="subtotal">0 ₸</strong>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md);">
+                <span>Доставка:</span>
+                <strong id="deliveryPrice">Бесплатно</strong>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; font-size: 1.3rem; font-weight: 700; padding-top: var(--spacing-md); border-top: 1px solid var(--border-color);">
+                <span>Итого:</span>
+                <strong id="total">0 ₸</strong>
+              </div>
+            </div>
+
+            <button class="btn btn-secondary" onclick="window.location.href='cart.html'" style="width: 100%; margin-top: var(--spacing-lg);">
+              ← Вернуться в корзину
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2024 IronPower Store. Все права защищены. | 
+      <a href="about.html">О нас</a> | 
+      <a href="#">Контакты</a> | 
+      <a href="#">Политика конфиденциальности</a>
+    </p>
+  </footer>
+
+  <!-- СКРИПТЫ -->
+  <script src="js/products.js"></script>
+  <script src="js/visitor.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    /**
+     * Загрузить товары в форму оформления
+     */
+    function loadCheckoutItems() {
+      const items = cartManager.getCartItems();
+      const container = document.querySelector('#checkoutItems');
+
+      if (items.length === 0) {
+        window.location.href = 'catalog.html';
+        return;
+      }
+
+      container.innerHTML = items.map(item => `
+        <div style="display: flex; justify-content: space-between; margin-bottom: var(--spacing-md); padding-bottom: var(--spacing-md); border-bottom: 1px solid var(--border-color);">
+          <div>
+            <p style="margin-bottom: var(--spacing-xs);">${item.name}</p>
+            <p style="color: var(--text-secondary); font-size: 0.9rem;">Кол-во: ${item.quantity} шт.</p>
+          </div>
+          <strong>${(item.price * item.quantity).toLocaleString('ru-RU')} ₸</strong>
+        </div>
+      `).join('');
+
+      updateCheckoutTotal();
+    }
+
+    /**
+     * Получить стоимость доставки в текущем выборе
+     */
+    function getSelectedDeliveryPrice() {
+      const selected = document.querySelector('input[name="delivery"]:checked');
+      return selected && selected.id === 'delivery2' ? 1200 : 0;
+    }
+
+    /**
+     * Обновить итоги
+     */
+    function updateCheckoutTotal() {
+      const subtotal = cartManager.getTotalPrice();
+      const deliveryPrice = getSelectedDeliveryPrice();
+      document.querySelector('#subtotal').textContent = subtotal.toLocaleString('ru-RU') + ' ₸';
+      document.querySelector('#deliveryPrice').textContent = deliveryPrice
+        ? deliveryPrice.toLocaleString('ru-RU') + ' ₸'
+        : 'Бесплатно';
+      document.querySelector('#total').textContent = (subtotal + deliveryPrice).toLocaleString('ru-RU') + ' ₸';
+    }
+
+    /**
+     * Завершить заказ
+     */
+    function completeOrder() {
+      const firstName = document.querySelector('#firstName').value;
+      const lastName = document.querySelector('#lastName').value;
+      const email = document.querySelector('#email').value;
+      const phone = document.querySelector('#phone').value;
+      const city = document.querySelector('#city').value;
+      const address = document.querySelector('#address').value;
+
+      if (!firstName || !lastName || !email || !phone || !city || !address) {
+        showNotification('Заполните все обязательные поля!', 'error');
+        return;
+      }
+
+      // Очистить корзину
+      cartManager.clearCart();
+
+      // Показать сообщение об успехе
+      alert('✅ Спасибо за заказ!\n\nВаш заказ принят.\nМы отправим подтверждение на ' + email);
+
+      // Перенаправить на главную
+      window.location.href = 'index.html';
+    }
+
+    // Инициализировать при загрузке
+    document.addEventListener('DOMContentLoaded', function() {
+      loadCheckoutItems();
+    });
+
+    // Обновлять доставку
+    document.querySelectorAll('input[name="delivery"]').forEach(radio => {
+      radio.addEventListener('change', function() {
+        updateCheckoutTotal();
+      });
+    });
+  </script>
+</body>
+</html>

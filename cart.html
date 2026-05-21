@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Корзина - IronPower Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">💪</span>
+        <span>IronPower Store</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html">Каталог</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li>
+          <a href="cart.html" class="cart-link active">
+            🛒 Корзина
+            <span class="cart-counter">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== КОРЗИНА ===== -->
+  <main>
+    <section class="catalog-section">
+      <h2 class="section-title">🛒 Ваша корзина</h2>
+
+      <div class="cart-container">
+        <div class="cart-items-container">
+          <!-- Будет загружено через JavaScript -->
+        </div>
+
+        <div class="order-summary">
+          <!-- Будет загружено через JavaScript -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2024 IronPower Store. Все права защищены. | 
+      <a href="about.html">О нас</a> | 
+      <a href="#">Контакты</a> | 
+      <a href="#">Политика конфиденциальности</a>
+    </p>
+  </footer>
+
+  <!-- СКРИПТЫ -->
+  <script src="js/products.js"></script>
+  <script src="js/visitor.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

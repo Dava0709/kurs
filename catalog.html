@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Каталог товаров - IronPower Store</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ===== HEADER ===== -->
+  <header>
+    <nav>
+      <a href="index.html" class="logo">
+        <span class="logo-icon">💪</span>
+        <span>IronPower Store</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">Главная</a></li>
+        <li><a href="catalog.html" class="active">Каталог</a></li>
+        <li><a href="about.html">О нас</a></li>
+        <li>
+          <a href="cart.html" class="cart-link">
+            🛒 Корзина
+            <span class="cart-counter">0</span>
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ===== КАТАЛОГ ===== -->
+  <main>
+    <section class="catalog-section">
+      <div class="section-header">
+        <h2 class="section-title">Каталог товаров</h2>
+        <p class="section-subtitle">Выберите качественное спортивное питание для своих тренировок</p>
+      </div>
+
+      <!-- ФИЛЬТРЫ (Опционально) -->
+      <div style="margin-bottom: var(--spacing-lg); display: flex; gap: var(--spacing-md); flex-wrap: wrap;">
+        <button class="btn btn-secondary" onclick="filterByCategory('all')">Все товары</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Протеин')">Протеин</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Креатин')">Креатин</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('BCAA')">BCAA</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Гейнер')">Гейнер</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Предтренировочные')">Предтренировочные</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Витамины')">Витамины</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Жиросжигатели')">Жиросжигатели</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Восстановление')">Восстановление</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Батончики')">Батончики</button>
+        <button class="btn btn-secondary" onclick="filterByCategory('Изоляты')">Изоляты</button>
+      </div>
+
+      <!-- СЕТКА ТОВАРОВ -->
+      <div class="catalog-grid">
+        <!-- Будет загружено через JavaScript -->
+      </div>
+    </section>
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer>
+    <p>&copy; 2024 IronPower Store. Все права защищены. | 
+      <a href="about.html">О нас</a> | 
+      <a href="#">Контакты</a> | 
+      <a href="#">Политика конфиденциальности</a>
+    </p>
+  </footer>
+
+  <!-- СКРИПТЫ -->
+  <script src="js/products.js"></script>
+  <script src="js/visitor.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+
+  <script>
+    /**
+     * Фильтрация товаров по категориям
+     */
+    function filterByCategory(category) {
+      const catalogGrid = document.querySelector('.catalog-grid');
+      catalogGrid.innerHTML = '';
+
+      const normalizeName = value => value.toLowerCase();
+
+      const matchesCategory = (product, categoryKey) => {
+        const name = normalizeName(product.name);
+
+        switch (categoryKey) {
+          case 'all':
+            return true;
+          case 'Витамины':
+            return name.includes('vitamin') || name.includes('multivitamin');
+          case 'Жиросжигатели':
+            return name.includes('fat burner') || name.includes('carnitine');
+          case 'Восстановление':
+            return product.category === 'BCAA' || name.includes('recovery');
+          case 'Батончики':
+            return name.includes('bar');
+          case 'Изоляты':
+            return product.proteinType === 'Isolate' || product.proteinType === 'Casein';
+          case 'Предтренировочные':
+            return product.category === 'Предтренировочный комплекс';
+          default:
+            return product.category === categoryKey;
+        }
+      };
+
+      const productsToShow = allProducts.filter(product => matchesCategory(product, category));
+
+      if (productsToShow.length === 0) {
+        catalogGrid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; padding: var(--spacing-lg);">
+          <p style="color: var(--text-secondary);">Товары не найдены</p>
+        </div>`;
+        return;
+      }
+
+      productsToShow.forEach(product => {
+        const card = createProductCard(product);
+        catalogGrid.appendChild(card);
+      });
+
+      document.querySelectorAll('.btn-secondary').forEach(btn => {
+        btn.style.borderColor = '';
+        btn.style.color = '';
+      });
+      if (event && event.target) {
+        event.target.style.borderColor = 'var(--primary-color)';
+        event.target.style.color = 'var(--primary-color)';
+      }
+    }
+
+    // Инициализировать при загрузке страницы
+    document.addEventListener('DOMContentLoaded', function() {
+      const catalogGrid = document.querySelector('.catalog-grid');
+      if (catalogGrid) {
+        allProducts.forEach(product => {
+          const card = createProductCard(product);
+          catalogGrid.appendChild(card);
+        });
+      }
+    });
+  </script>
+</body>
+</html>
